@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RPSLS — Rock Paper Scissors Lizard Spock (Phaser)</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Play Rock Paper Scissors Lizard Spock — animated avatars, responsive Phaser 3 game with score tracking and adjustable difficulty." />
+</head>
+<body>
+  <main id="app" role="main" aria-labelledby="game-title">
+    <header class="topbar">
+      <h1 id="game-title">RPSLS — Rock · Paper · Scissors · Lizard · Spock</h1>
+      <div class="controls">
+        <label for="difficulty">Difficulty</label>
+        <select id="difficulty" aria-label="Select difficulty">
+          <option value="easy">Easy</option>
+          <option value="normal" selected>Normal</option>
+          <option value="hard">Hard</option>
+        </select>
+        <button id="reset-btn">Reset Score</button>
+      </div>
+    </header>
+
+    <section id="game-container" class="game-container" aria-live="polite"></section>
+
+    <aside class="sidebar" aria-label="Game information">
+      <div class="scoreboard" aria-hidden="false">
+        <h2>Score</h2>
+        <p id="score">Player: 0 — CPU: 0</p>
+        <p id="tries">Tries left: 10</p>
+      </div>
+      <div class="log" aria-live="polite" id="round-log">Choose an avatar to play.</div>
+      <footer class="attribution">Built with Phaser 3 — accessible and responsive demo.</footer>
+    </aside>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+  <script src="game.js" type="module"></script>
+</body>
+</html>
