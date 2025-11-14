@@ -1,110 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RPSLS — Animated + Sound + AI</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Lizard Spock</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <h1>Rock · Paper · Scissors · Lizard · Spock</h1>
-    <p class="tagline">Animated avatars • micro-sounds • simple predictive AI</p>
-  </header>
 
-  <main class="container">
-    <section class="scoreboard" aria-label="Scoreboard">
-      <div class="score player-score" aria-live="polite">
-        <div class="label">Player</div>
-        <div id="player-score" class="value">0</div>
-      </div>
-      <div class="vs">vs</div>
-      <div class="score computer-score" aria-live="polite">
-        <div class="label">Computer</div>
-        <div id="computer-score" class="value">0</div>
-      </div>
+    <header>
+        <h1>Rock • Paper • Scissors • Lizard • Spock</h1>
+        <p class="subtitle">Beat the AI. Track your score. Enjoy animations & sound.</p>
+    </header>
+
+    <!-- Control Panel -->
+    <section class="control-panel">
+        <button id="soundToggle" class="toggle-btn active">Sound: ON</button>
+
+        <select id="difficultySelect">
+            <option value="easy">Easy</option>
+            <option value="normal" selected>Normal</option>
+            <option value="hard">Hard (AI Prediction)</option>
+        </select>
+
+        <button id="resetGame" class="toggle-btn">Reset Game</button>
     </section>
 
-    <section class="arena" aria-label="Game arena">
-      <div class="top-controls" style="width:100%;display:flex;justify-content:space-between;gap:12px;align-items:center;">
-        <div class="left-controls" style="display:flex;gap:10px;align-items:center;">
-          <label class="control-inline"><input id="sound-toggle" type="checkbox" checked> Sound</label>
-          <label class="control-inline"><input id="ai-toggle" type="checkbox"> Enable AI</label>
-          <label class="control-inline" title="Use last N moves for prediction">Order:
-            <input id="ai-order" type="number" min="1" max="5" value="2" style="width:3rem">
-          </label>
-          <label class="control-inline" title="Probability AI uses its prediction (0-100)">
-            Predictive weight:
-            <input id="ai-weight" type="number" min="0" max="100" value="80" style="width:3.5rem">%
-          </label>
+    <!-- Game Area -->
+    <main class="game-container">
+
+        <div class="choices">
+            <div class="choice" data-move="rock">🪨 Rock</div>
+            <div class="choice" data-move="paper">📄 Paper</div>
+            <div class="choice" data-move="scissors">✂️ Scissors</div>
+            <div class="choice" data-move="lizard">🦎 Lizard</div>
+            <div class="choice" data-move="spock">🖖 Spock</div>
         </div>
 
-        <div class="right-controls" style="display:flex;gap:8px;align-items:center;">
-          <button id="reset-btn" class="btn small">Reset Score</button>
-          <button id="export-log" class="btn small muted">Export Log</button>
+        <div class="result">
+            <h2 id="resultMessage" class="result-message">Make your move!</h2>
+            <p id="aiPrediction" class="ai-prediction"></p>
+            <p id="hintBox" class="hint-box"></p>
+
+            <div class="scoreboard">
+                <p>You: <span id="playerScore">0</span></p>
+                <p>AI: <span id="computerScore">0</span></p>
+            </div>
         </div>
-      </div>
 
-      <div class="avatars">
-        <div class="avatar-slot player" aria-hidden="true">
-          <div id="player-avatar" class="avatar-placeholder"></div>
-        </div>
+    </main>
 
-        <div class="countdown" id="countdown" aria-hidden="true"></div>
-
-        <div class="avatar-slot computer" aria-hidden="true">
-          <div id="computer-avatar" class="avatar-placeholder"></div>
-        </div>
-      </div>
-
-      <div class="result" role="status" aria-live="polite">
-        <p id="result-text">Choose your move</p>
-        <p id="ai-hint" class="muted small" aria-live="polite"></p>
-      </div>
-
-      <div class="choices" role="list" aria-label="Pick your move">
-        <button class="choice" data-choice="rock" role="listitem" aria-label="Choose Rock">
-          <!-- Rock SVG -->
-          <svg viewBox="0 0 120 120" class="icon rock" aria-hidden="true"> ... </svg>
-          <span class="label">Rock</span>
-        </button>
-
-        <button class="choice" data-choice="paper" role="listitem" aria-label="Choose Paper">
-          <svg viewBox="0 0 120 120" class="icon paper" aria-hidden="true"> ... </svg>
-          <span class="label">Paper</span>
-        </button>
-
-        <button class="choice" data-choice="scissors" role="listitem" aria-label="Choose Scissors">
-          <svg viewBox="0 0 120 120" class="icon scissors" aria-hidden="true"> ... </svg>
-          <span class="label">Scissors</span>
-        </button>
-
-        <button class="choice" data-choice="lizard" role="listitem" aria-label="Choose Lizard">
-          <svg viewBox="0 0 120 120" class="icon lizard" aria-hidden="true"> ... </svg>
-          <span class="label">Lizard</span>
-        </button>
-
-        <button class="choice" data-choice="spock" role="listitem" aria-label="Choose Spock">
-          <svg viewBox="0 0 120 120" class="icon spock" aria-hidden="true"> ... </svg>
-          <span class="label">Spock</span>
-        </button>
-      </div>
-
-      <div class="controls">
-        <label class="tries">
-          <input type="checkbox" id="limit-tries"> Limit tries to
-          <input id="tries-input" type="number" value="5" min="1" max="50" style="width:4rem">
-        </label>
-      </div>
-
-      <div class="history" id="history" aria-live="polite"></div>
+    <!-- Move History -->
+    <section class="move-history">
+        <h3>Move History</h3>
+        <ul id="moveList"></ul>
     </section>
-  </main>
 
-  <footer class="site-footer">
-    <small>© 2025 RPSLS Game — Animated + Sound + AI</small>
-  </footer>
+    <!-- Sounds -->
+    <audio id="soundWin" src="sounds/win.wav"></audio>
+    <audio id="soundLose" src="sounds/lose.wav"></audio>
+    <audio id="soundTie" src="sounds/tie.wav"></audio>
+    <audio id="soundClick" src="sounds/click.wav"></audio>
 
-  <script src="js/script.js" defer></script>
+<script src="js/script.js"></script>
 </body>
 </html>

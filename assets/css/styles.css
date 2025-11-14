@@ -1,125 +1,128 @@
-/* -------------------------------------- */
-/*  NEW UI ELEMENTS: SOUND, DIFFICULTY, HINTS, MOVE HISTORY
-/* -------------------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    background: #0b0f19;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
-/* Control panel wrapper */
+header {
+    margin-top: 1rem;
+}
+
+.subtitle {
+    color: #00e1ff;
+    margin-bottom: 1.5rem;
+}
+
+/* Game Layout */
+.game-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+}
+
+.choices {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.choice {
+    background: #111;
+    border: 2px solid #00e1ff;
+    padding: 1rem;
+    width: 120px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s ease;
+}
+
+.choice:hover {
+    background: #00e1ff;
+    color: #111;
+    transform: scale(1.15);
+}
+
+/* Result Text */
+.result-message {
+    font-size: 1.7rem;
+    margin-top: 1rem;
+}
+
+.result-win { color: #00ff85; }
+.result-lose { color: #ff3b58; }
+.result-tie { color: #ffc107; }
+
+.scoreboard p {
+    font-size: 1.3rem;
+}
+
+/* Control Panel */
 .control-panel {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
-/* Toggle buttons (sound, AI, etc.) */
 .toggle-btn {
     padding: 0.5rem 1rem;
-    background: #222;
+    background: #111;
     border: 2px solid #00e1ff;
-    color: white;
     border-radius: 8px;
     cursor: pointer;
-    transition: 0.3s ease;
-    font-size: 0.9rem;
 }
 
-.toggle-btn:hover {
-    background: #00e1ff;
-    color: #111;
-    transform: scale(1.05);
-}
-
-/* Active state */
 .toggle-btn.active {
     background: #00e1ff;
     color: #111;
-    border-color: white;
 }
 
-/* Difficulty dropdown */
 #difficultySelect {
     padding: 0.5rem;
     background: #111;
-    color: white;
     border: 2px solid #00e1ff;
     border-radius: 8px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: 0.3s ease;
+    color: white;
 }
 
-#difficultySelect:hover {
-    border-color: white;
-}
-
-/* Hint panel */
-.hint-box {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 1.1rem;
-    color: #00e1ff;
-    font-weight: 600;
-}
-
-/* AI prediction box */
-.ai-prediction {
-    margin-top: 0.5rem;
-    text-align: center;
-    color: #ffa700;
-    font-size: 0.95rem;
-    font-style: italic;
-}
-
-/* Move history container */
+/* Move History */
 .move-history {
-    margin: 1.5rem auto;
-    padding: 1rem;
     max-width: 350px;
+    margin: auto;
+    margin-top: 1.5rem;
+    padding: 1rem;
     background: rgba(255,255,255,0.05);
     border: 2px solid #00e1ff;
     border-radius: 12px;
-    text-align: center;
-    color: white;
-}
-
-.move-history h3 {
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-    color: #00e1ff;
 }
 
 .move-history ul {
+    max-height: 200px;
+    overflow-y: auto;
     list-style: none;
     padding: 0;
-    margin: 0;
-    max-height: 150px;
-    overflow-y: auto;
 }
 
 .move-history li {
+    background: rgba(0,225,255,0.15);
     padding: 0.4rem;
-    margin: 0.2rem 0;
-    background: rgba(0, 225, 255, 0.15);
+    margin: 0.2rem;
     border-radius: 6px;
-    font-size: 0.9rem;
 }
 
-/* Scrollbar styling (webkit) */
-.move-history ul::-webkit-scrollbar {
-    width: 8px;
-}
+/* Responsive */
+@media (max-width: 600px) {
+    .choice {
+        width: 90%;
+    }
 
-.move-history ul::-webkit-scrollbar-thumb {
-    background: #00e1ff;
-    border-radius: 10px;
+    #difficultySelect,
+    .toggle-btn {
+        width: 85%;
+    }
 }
-
-.move-history ul::-webkit-scrollbar-track {
-    background: rgba(255,255,255,0.05);
-}
-
-/* -------------------------------------- */
-/*  SOUND FEEDBACK ICON/FLASH
-/* -------------------------------------- */
-.sound-f
