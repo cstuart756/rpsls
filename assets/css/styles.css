@@ -1,60 +1,125 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+/* -------------------------------------- */
+/*  NEW UI ELEMENTS: SOUND, DIFFICULTY, HINTS, MOVE HISTORY
+/* -------------------------------------- */
+
+/* Control panel wrapper */
+.control-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background: linear-gradient(to bottom right, #ffefba, #ffffff);
-  min-height: 100vh;
+/* Toggle buttons (sound, AI, etc.) */
+.toggle-btn {
+    padding: 0.5rem 1rem;
+    background: #222;
+    border: 2px solid #00e1ff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-size: 0.9rem;
 }
 
-header {
-  margin-bottom: 20px;
+.toggle-btn:hover {
+    background: #00e1ff;
+    color: #111;
+    transform: scale(1.05);
 }
 
-.scoreboard {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 20px;
-  font-size: 1.2em;
+/* Active state */
+.toggle-btn.active {
+    background: #00e1ff;
+    color: #111;
+    border-color: white;
 }
 
-.game {
-  text-align: center;
+/* Difficulty dropdown */
+#difficultySelect {
+    padding: 0.5rem;
+    background: #111;
+    color: white;
+    border: 2px solid #00e1ff;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
-.choices {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 15px 0;
+#difficultySelect:hover {
+    border-color: white;
 }
 
-.choices img {
-  width: 80px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+/* Hint panel */
+.hint-box {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: #00e1ff;
+    font-weight: 600;
 }
 
-.choices img:hover {
-  transform: scale(1.2);
+/* AI prediction box */
+.ai-prediction {
+    margin-top: 0.5rem;
+    text-align: center;
+    color: #ffa700;
+    font-size: 0.95rem;
+    font-style: italic;
 }
 
-.result {
-  margin-top: 20px;
-  font-size: 1.2em;
-  min-height: 40px;
+/* Move history container */
+.move-history {
+    margin: 1.5rem auto;
+    padding: 1rem;
+    max-width: 350px;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid #00e1ff;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
 }
 
-footer {
-  margin-top: auto;
-  padding: 10px;
+.move-history h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: #00e1ff;
 }
+
+.move-history ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.move-history li {
+    padding: 0.4rem;
+    margin: 0.2rem 0;
+    background: rgba(0, 225, 255, 0.15);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+/* Scrollbar styling (webkit) */
+.move-history ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+.move-history ul::-webkit-scrollbar-thumb {
+    background: #00e1ff;
+    border-radius: 10px;
+}
+
+.move-history ul::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+}
+
+/* -------------------------------------- */
+/*  SOUND FEEDBACK ICON/FLASH
+/* -------------------------------------- */
+.sound-f
