@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuizMaster — Accessible Responsive Quiz</title>
+  <meta name="description" content="QuizMaster — single-page responsive accessible quiz app with score tracking and image feedback." />
+
+  <!-- Preload key fonts or assets if any (none here) -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <h1 id="app-title" class="logo">QuizMaster</h1>
+      <form id="username-form" class="username-form" aria-label="Set username">
+        <label for="username-input" class="visually-hidden">Username</label>
+        <input id="username-input" name="username" type="text" placeholder="Enter username" maxlength="24" />
+        <button id="save-username" type="submit" class="btn">Save</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="container" id="main" role="main">
+    <section id="intro" class="card" aria-labelledby="intro-heading">
+      <h2 id="intro-heading">Welcome to QuizMaster</h2>
+      <p>Test your knowledge across categories. Use keyboard or mouse; everything is accessible. Click Start to begin.</p>
+      <div class="controls">
+        <label for="category-select">Category</label>
+        <select id="category-select" aria-label="Choose category">
+          <option value="any">Any / Mixed</option>
+          <option value="sports">Sports</option>
+          <option value="movies">Movies</option>
+          <option value="literature">Literature</option>
+          <option value="personality">Personality</option>
+        </select>
+
+        <label for="timed-switch" class="timed-label">
+          <input id="timed-switch" type="checkbox" /> Timed quiz (30s per question)
+        </label>
+
+        <button id="start-btn" class="btn primary">Start Quiz</button>
+      </div>
+      <div id="greeting" class="greeting" aria-live="polite"></div>
+    </section>
+
+    <section id="quiz-area" class="card hidden" aria-labelledby="question-heading" role="region">
+      <header class="quiz-header">
+        <h2 id="question-heading" class="question-heading">Question</h2>
+        <div class="status">
+          <div class="score" aria-live="polite">Score: <span id="score">0</span></div>
+          <div class="progress" aria-hidden="false">Q <span id="q-index">0</span>/<span id="q-total">0</span></div>
+          <div id="timer" class="timer" aria-live="polite" hidden>30</div>
+        </div>
+      </header>
+
+      <div id="question-panel" class="question-panel">
+        <div id="question-text" class="question-text"></div>
+        <div id="question-image" class="question-image" aria-hidden="true"></div>
+
+        <div id="choices" class="choices" role="radiogroup" aria-labelledby="question-heading"></div>
+
+        <div class="action-row">
+          <button id="submit-btn" class="btn" disabled>Submit</button>
+          <button id="skip-btn" class="btn ghost">Skip</button>
+        </div>
+
+        <div id="feedback" class="feedback" aria-live="assertive" role="status"></div>
+      </div>
+    </section>
+
+    <section id="results-area" class="card hidden" aria-labelledby="results-heading">
+      <h2 id="results-heading">Results</h2>
+      <p id="final-summary"></p>
+      <div class="result-stats">
+        <div>Correct: <span id="final-correct">0</span></div>
+        <div>Incorrect: <span id="final-incorrect">0</span></div>
+        <div>Score: <strong id="final-score">0</strong></div>
+      </div>
+      <div class="result-actions">
+        <button id="retry-btn" class="btn">Play Again</button>
+        <button id="view-leaderboard" class="btn ghost">View Leaderboard</button>
+      </div>
+      <div id="certificate" class="certificate" aria-hidden="true"></div>
+    </section>
+
+    <aside id="sidebar" class="card sidebar" aria-labelledby="sidebar-heading">
+      <h3 id="sidebar-heading">Sidebar</h3>
+      <div class="score-board">
+        <p>Best Score: <span id="best-score">—</span></p>
+        <p>Username: <span id="saved-username">Guest</span></p>
+      </div>
+      <div class="leaderboard card small" aria-labelledby="leaderboard-heading">
+        <h4 id="leaderboard-heading">Leaderboard</h4>
+        <ol id="leaderboard-list"></ol>
+      </div>
+      <div class="notes">
+        <p><small>Accessibility: use tab/arrow keys to navigate options; Enter to select. Images include alt text.</small></p>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <small>QuizMaster • Demo app • Accessible and responsive</small>
+      <nav aria-label="Footer links">
+        <a href="#" id="about-link">About</a> |
+        <a href="#" id="docs-link">Docs</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Inline SVG templates for correct/incorrect feedback (kept in DOM for quick use) -->
+  <svg id="correct-svg" xmlns="http://www.w3.org/2000/svg" style="display:none" viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="56" fill="#e6ffef" stroke="#15a574" stroke-width="4"/>
+    <path d="M35 63 L52 80 L85 40" fill="none" stroke="#0a7f50" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="60" y="102" fill="#0a7f50" font-size="10" text-anchor="middle">Correct!</text>
+  </svg>
+
+  <svg id="incorrect-svg" xmlns="http://www.w3.org/2000/svg" style="display:none" viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="56" fill="#fff0f0" stroke="#d14b4b" stroke-width="4"/>
+    <path d="M40 40 L80 80 M80 40 L40 80" fill="none" stroke="#a12e2e" stroke-width="6" stroke-linecap="round"/>
+    <text x="60" y="102" fill="#a12e2e" font-size="10" text-anchor="middle">Incorrect</text>
+  </svg>
+
+  <!-- Core script -->
+  <script defer src="js/app.js"></script>
+</body>
+</html>
