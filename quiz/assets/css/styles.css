@@ -1,0 +1,192 @@
+/* styles.css — Simple, accessible, responsive layout
+   Use this file at path: css/styles.css
+*/
+
+:root{
+  --bg:#f7f8fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#2563eb;
+  --success:#0a7f50;
+  --danger:#a12e2e;
+  --radius:12px;
+  --container-width:1100px;
+  --gap:16px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.4;
+}
+
+.container{
+  max-width:var(--container-width);
+  margin:0 auto;
+  padding:16px;
+}
+
+/* Accessibility helper */
+.visually-hidden{
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Header */
+.site-header{
+  background:linear-gradient(90deg,#ffffff,#f3f4f6);
+  border-bottom:1px solid #e6e9ef;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 16px;
+}
+.logo{
+  margin:0;
+  font-size:1.25rem;
+  letter-spacing:.4px;
+}
+
+/* Cards */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:0 2px 8px rgba(15,23,42,0.04);
+  margin-bottom:16px;
+}
+
+/* Layout */
+main.container{
+  display:grid;
+  grid-template-columns: 1fr 300px;
+  gap:var(--gap);
+  align-items:start;
+  margin-top:16px;
+}
+.sidebar{position:sticky; top:16px; height:fit-content}
+@media (max-width:900px){
+  main.container{
+    grid-template-columns: 1fr;
+  }
+  .sidebar{order:3}
+}
+
+/* Controls */
+.controls{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+.username-form{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.username-form input[type="text"]{
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid #d1d5db;
+  min-width:160px;
+}
+.btn{
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid transparent;
+  background:#fff;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow:0 1px 3px rgba(0,0,0,0.04);
+}
+.btn:hover{filter:brightness(.98)}
+.btn.primary{
+  background:var(--accent);
+  color:white;
+  border-color:transparent;
+}
+.btn.ghost{
+  background:transparent;
+  border:1px solid #e6e9ef;
+}
+
+/* Quiz panel */
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+.question-text{
+  margin-top:12px;
+  font-size:1.1rem;
+}
+.question-image{
+  margin-top:12px;
+  max-width:320px;
+}
+.question-image img{max-width:100%; height:auto; border-radius:8px}
+
+/* Choices */
+.choices{
+  margin-top:12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.choice{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #e6e9ef;
+  cursor:pointer;
+}
+.choice input[type="radio"]{
+  accent-color:var(--accent);
+}
+.choice[aria-checked="true"]{
+  outline:3px solid rgba(37,99,235,0.12);
+  background:linear-gradient(0deg,#ffffff,#fbfdff);
+}
+
+/* Feedback */
+.feedback{
+  margin-top:12px;
+  padding:12px;
+  border-radius:8px;
+  min-height:56px;
+}
+.feedback.success{border-left:4px solid var(--success); background:#f0fff6}
+.feedback.error{border-left:4px solid var(--danger); background:#fff6f6}
+
+/* Result and certificate */
+.result-stats{display:flex; gap:16px; margin-top:8px}
+.certificate{
+  margin-top:12px;
+  padding:10px;
+  border-radius:8px;
+  border:1px dashed #e6e9ef;
+  background:linear-gradient(90deg,#ffffff,#fbfdff);
+}
+
+/* Small screens adjustments */
+@media (max-width:600px){
+  .controls{flex-direction:column; align-items:stretch}
+  .username-form{margin-top:8px}
+  .question-image{max-width:100%}
+}
